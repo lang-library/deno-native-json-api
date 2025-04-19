@@ -5,7 +5,7 @@ export class NativeJsonApi {
       Call: { parameters: ["buffer", "buffer"], result: "pointer" },
     });
   }
-  Call(name, args) {
+  call(name, args) {
     let input = JSON.stringify(args, null, 2);
     const buffer1 = StringToCStringBuffer(name);
     const buffer2 = StringToCStringBuffer(input);
@@ -16,6 +16,9 @@ export class NativeJsonApi {
       throw new Error(result);
     }
     return result[0];
+  }
+  call$(name, ...args) {
+    return this.call(name, args);
   }
 }
 
